@@ -48,36 +48,39 @@ int encode_character(char ch, char* multitap){
 void encode(const char* str, char* multitap){
 
   char encoded[100];
-	bool Caps_On = false;
-	string result = "";
+  bool Caps_On = false;
+  string result = "";
 
   for (int i = 0; str[i]!='\0'; i++){
 
-		// Toggle caps on
-		if (isupper(str[i]) && !Caps_On){
-      			result += '#';
-			Caps_On = true;
-		}
+    // Toggle caps on
+    if (isupper(str[i]) && !Caps_On){
+      result += '#';
+      Caps_On = true;
+    }
 
-		// Toggle caps off
-		if (islower(str[i]) && Caps_On){
-			result += '#';
-			Caps_On = false;
-		}
+    // Toggle caps off
+    if (islower(str[i]) && Caps_On){
+      result += '#';
+      Caps_On = false;
+    }
 
-		// Get the encoded char array, convert it
-		// to a string and concatenate it
-		encode_character(str[i], encoded);  
-		string str_encoded(encoded);
-	  	result += str_encoded; 
-    
-		// Check if '|' is necessary
-		if (str[i+1] == str[i] && str[i+1] != '\0'){
-			result += '|';
-		}
-	}
- 
-	// Return the goddamn encoding 
-  	strcpy(multitap, result.c_str());
+    // Get the encoded char array, convert it
+    // to a string and concatenate it
+    encode_character(str[i], encoded);
+    string str_encoded(encoded);
+
+    // Check if '|' is necessary
+    int res_len = result.length();
+    if (result[res_len -1] == str_encoded[0]){
+      result += '|';
+    }
+
+    result += str_encoded;
+
+  }
+
+  // Return the goddamn encoding 
+  strcpy(multitap, result.c_str());
   	
 }
