@@ -12,7 +12,7 @@ int encode_character(char ch, char* multitap){
 		multitap[0] = '*';
 		multitap[1] = ch;
 		multitap[2] = '\0';
-    return 3;
+    		return 3;
 	}
 
 	// Encode spaces
@@ -55,7 +55,7 @@ void encode(const char* str, char* multitap){
 
 		// Toggle caps on
 		if (isupper(str[i]) && !Caps_On){
-      result += '#';
+      			result += '#';
 			Caps_On = true;
 		}
 
@@ -69,7 +69,7 @@ void encode(const char* str, char* multitap){
 		// to a string and concatenate it
 		encode_character(str[i], encoded);  
 		string str_encoded(encoded);
-	  result += str_encoded; 
+	  	result += str_encoded; 
     
 		// Check if '|' is necessary
 		if (str[i+1] == str[i] && str[i+1] != '\0'){
@@ -78,6 +78,6 @@ void encode(const char* str, char* multitap){
 	}
  
 	// Return the goddamn encoding 
-  strcpy(multitap, result.c_str());
+  	strcpy(multitap, result.c_str());
   	
 }
