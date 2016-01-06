@@ -30,7 +30,10 @@ bool is_prefix(const char* substr, const char* str){
 
   return false; 
 }
-// Iterative Solutionww
+
+
+
+// Iterative Solution
 int substring_position_itr(char const* substring, char const* mainString){
 
   //Check length of substring 
