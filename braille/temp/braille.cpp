@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <stdlib.h>
  
- 
+
 using namespace std;
  
 int encode_character(char ch, char braille[]);
@@ -173,38 +173,64 @@ char encode_text(char sentence[], char braille[])
   char accumulator[300]; 
   accumulator[0] = '\0';
 
-
-  cout << "Testing recursive function" << endl;
-  cout << endl;
-  cout << "Length: " << length << endl;
   encode_recursive(sentence, braille, length, i, accumulator);
 }
  
+
+
+/* How this crap works:
+ *
+ * You have 3 main data structures, sentence, braille and acc
+ *
+ * Do not touch braille until the very end of the recursion.
+ *
+ * So, as you loop through the sentence you need to encode each of the letters.
+ * Encode the letters into a temporary variable called accNew and append 
+ * this to the main accumulator.
+ *
+ * Pass the updated accumulator into the next step of the recursion, increment
+ * the counter so you go to the next letter of the sentence and reduce the
+ * length.
+ *
+ * When you get to the end of the recursion (when length is 0), set the
+ * braille to the accumlated encoding using strcpy.
+ *
+ * 
+ *
+ * What went wrong the first time:
+ *
+ * Trying to update braille continuously during the recursion. Better to 
+ * leave it be until all the encodings are complete in an accumulator string 
+ * and just copy it at the end.
+ *
+ *
+ *
+ * Still to do:
+ *
+ * encode_recursive and encode_text should return void. The output is simply
+ * the braille parameter. Think of that as the return type.
+ *
+ */ 
 char encode_recursive(char sentence[], char braille[], int length, int i, char acc[])
 {
 
   if(sentence[i] == ' ') i++;
+    
+
+  // Set braille when the end of the sentence is reached
   if (length == 0){
-    cout << "End of recursion" << endl;
     strcpy(braille, acc);
     return 0;
   }
 
-  char accNew[100];
 
-  
+  // Encode a new character into a temporary variable 
+  char accNew[100];
   encode_character(sentence[i],accNew);
   
-  cout << "accNew: " << accNew << endl;
-  cout << "acc: " << acc << endl; 
+  // Update the accumulator
   strcat(acc, accNew);
 
-  cout << "sentence: " << sentence[i] << endl;
-  cout << "accumulator: " << acc << endl;
-  
-   
-
+  // Pass in the updated accumulator
   encode_recursive(sentence, braille, length-1, ++i, acc);
- 
-  
 }
