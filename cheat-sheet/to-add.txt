@@ -1,0 +1,40 @@
+makefile
+
+const char
+
+return 0 for main
+
+char +1 ( or how to loop through a string recursively)
+
+length of a string
+
+swtich statement
+
+is punct 
+
+isalnum
+
+compare function strcomp
+
+ascii table
+
+strcopy 
+stringt o char and back
+
+streams!
+
+char[] to make a string
+
+braille 
+str cat
+
+pointers
+double
+
+for loops with variables outside
+
+pointers for output
+
+fstreams
+
+tube streams
