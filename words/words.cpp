@@ -57,7 +57,7 @@ bool anagram(const char* str1, const char* str2){
   }
 
   for (int i = 0; i < 26; i++){
-    if(letters[i] > 0) return false;
+    if(letters[i] != 0) return false;
   }
 
   return true; 
